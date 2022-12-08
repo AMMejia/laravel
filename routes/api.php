@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Package\PackageController;
+use App\Http\Controllers\Event\EventController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,117 +31,101 @@ Route::group([
     Route::post('login', [AuthController::class, 'login']);
 
     // POST api/auth/logout
-    Route::post('logout', 'AuthController@logout');
+    Route::post('logout', [AuthController::class, 'logout']);
 
     // POST api/auth/refresh
-    Route::post('refresh', 'AuthController@refresh');
+    Route::post('refresh', [AuthController::class, 'refresh']);
 
     // POST api/auth/me
-    Route::post('me', 'AuthController@me');
+    Route::post('me', [AuthController::class, 'me']);
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::namespace('User')->group(function () {
+    // GET api/users
+    Route::get('users', [UserController::class, 'index']);
 
-        // GET api/users
-        Route::get('users', 'UserController@index');
+    // GET api/user/:user
+    Route::get('user/{user}', [UserController::class, 'show']);
 
-        // GET api/user/:user
-        Route::get('user/{user}', 'UserController@show');
+    // POST api/users
+    Route::post('users', [UserController::class, 'store']);
 
-        // POST api/users
-        Route::post('users', 'UserController@store');
+    // PUT api/user/:user
+    Route::put('user/{user}', [UserController::class, 'update']);
 
-        // PUT api/user/:user
-        Route::put('user/{user}', 'UserController@update');
+    // DELETE api/user/:user
+    Route::delete('user/{user}', [UserController::class, 'destroy']); 
+    
+    // POST api/user/image
+    Route::post('user/image', [UserController::class, 'updateProfile']); 
 
-        // DELETE api/user/:user
-        Route::delete('user/{user}', 'UserController@destroy'); 
-        
-        // POST api/user/image
-        Route::post('user/image', 'UserController@updateProfile'); 
+    // POST api/user/password
+    Route::post('user/password', [UserController::class, 'changePassword']);
 
-        // POST api/user/password
-        Route::post('user/password', 'UserController@changePassword');
+    // POST api/user/profile
+    Route::post('user/profile', [UserController::class, 'changeProfile']);
 
-        // POST api/user/profile
-        Route::post('user/profile', 'UserController@changeProfile');
+    // GET api/categories
+    Route::get('categories', [CategoryController::class, 'index']);
 
-    });
+    // GET api/category/:category
+    Route::get('category/{category}', [CategoryController::class, 'show']);
 
-    Route::namespace('Category')->group(function () {
+    // POST api/category
+    Route::post('category', [CategoryController::class, 'store']);
 
-        // GET api/categories
-        Route::get('categories', 'CategoryController@index');
+    // PUT api/categor/:category
+    Route::put('category/{category}', [CategoryController::class, 'update']);
 
-        // GET api/category/:category
-        Route::get('category/{category}', 'CategoryController@show');
+    // DELETE api/category/:category
+    Route::delete('category/{category}', [CategoryController::class, 'destroy']);   
 
-        // POST api/category
-        Route::post('category', 'CategoryController@store');
+    // GET api/products
+    Route::get('products', [ProductController::class, 'index']);
 
-        // PUT api/categor/:category
-        Route::put('category/{category}', 'CategoryController@update');
+    // GET api/product/:product
+    Route::get('product/{product}', [ProductController::class, 'show']);
 
-        // DELETE api/category/:category
-        Route::delete('category/{category}', 'CategoryController@destroy');   
-    });
+    // POST api/product
+    Route::post('product', [ProductController::class, 'store']);
 
-    Route::namespace('Product')->group(function () {
+    // PUT api/product/:product
+    Route::put('product/{product}', [ProductController::class, 'update']);
 
-        // GET api/products
-        Route::get('products', 'ProductController@index');
+    // DELETE api/product/:product
+    Route::delete('product/{product}', [ProductController::class, 'destroy']);
+    
+    // POST api/product/image/:product
+    Route::post('product/image/{product}', [ProductController::class, 'updateImage']);
 
-        // GET api/product/:product
-        Route::get('product/{product}', 'ProductController@show');
+    // GET api/packages
+    Route::get('packages', [PackageController::class, 'index']);
 
-        // POST api/product
-        Route::post('product', 'ProductController@store');
+    // GET api/package/:package
+    Route::get('package/{package}', [PackageController::class, 'show']);
 
-        // PUT api/product/:product
-        Route::put('product/{product}', 'ProductController@update');
+    // POST api/package
+    Route::post('package', [PackageController::class, 'store']);
 
-        // DELETE api/product/:product
-        Route::delete('product/{product}', 'ProductController@destroy');
-        
-         // POST api/product/image/:product
-         Route::post('product/image/{product}', 'ProductController@updateImage');
-    });
+    // PUT api/package/:package
+    Route::put('package/{package}', [PackageController::class, 'update']);
 
-    Route::namespace('Package')->group(function () {
+    // DELETE api/package/:package
+    Route::delete('package/{package}', [PackageController::class, 'destroy']);   
 
-        // GET api/packages
-        Route::get('packages', 'PackageController@index');
+    // GET api/events
+    Route::get('events', [EventController::class, 'index']);
 
-        // GET api/package/:package
-        Route::get('package/{package}', 'PackageController@show');
+    // GET api/event/:event
+    Route::get('event/{event}', [EventController::class, 'show']);
 
-        // POST api/package
-        Route::post('package', 'PackageController@store');
+    // POST api/event
+    Route::post('event', [EventController::class, 'store']);
 
-        // PUT api/package/:package
-        Route::put('package/{package}', 'PackageController@update');
+    // PUT api/event/:event
+    Route::put('event/{event}', [EventController::class, 'update']);
 
-        // DELETE api/package/:package
-        Route::delete('package/{package}', 'PackageController@destroy');   
-    });
-
-    Route::namespace('Event')->group(function () {
-
-        // GET api/events
-        Route::get('events', 'EventController@index');
-
-        // GET api/event/:event
-        Route::get('event/{event}', 'EventController@show');
-
-        // POST api/event
-        Route::post('event', 'EventController@store');
-
-        // PUT api/event/:event
-        Route::put('event/{event}', 'EventController@update');
-
-        // DELETE api/event/:event
-        Route::delete('event/{event}', 'EventController@destroy');   
-    });
+    // DELETE api/event/:event
+    Route::delete('event/{event}', [EventController::class, 'destroy']);
 });
