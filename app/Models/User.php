@@ -24,7 +24,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $attributes = [
-        'profile_image' => '/images/profiles/default.png'
+        //'profile_image' => '/images/profiles/default.png'
     ];
 
     /**
