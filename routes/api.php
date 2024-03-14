@@ -55,10 +55,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('user/{user}', [UserController::class, 'update']);
 
     // DELETE api/user/:user
-    Route::delete('user/{user}', [UserController::class, 'destroy']); 
-    
+    Route::delete('user/{user}', [UserController::class, 'destroy']);
+
     // POST api/user/image
-    Route::post('user/image', [UserController::class, 'updateProfile']); 
+    Route::post('user/image', [UserController::class, 'updateProfile']);
 
     // POST api/user/password
     Route::post('user/password', [UserController::class, 'changePassword']);
@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('category/{category}', [CategoryController::class, 'update']);
 
     // DELETE api/category/:category
-    Route::delete('category/{category}', [CategoryController::class, 'destroy']);   
+    Route::delete('category/{category}', [CategoryController::class, 'destroy']);
 
     // GET api/products
     Route::get('products', [ProductController::class, 'index']);
@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     // DELETE api/product/:product
     Route::delete('product/{product}', [ProductController::class, 'destroy']);
-    
+
     // POST api/product/image/:product
     Route::post('product/image/{product}', [ProductController::class, 'updateImage']);
 
@@ -112,7 +112,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('package/{package}', [PackageController::class, 'update']);
 
     // DELETE api/package/:package
-    Route::delete('package/{package}', [PackageController::class, 'destroy']);   
+    Route::delete('package/{package}', [PackageController::class, 'destroy']);
 
     // GET api/events
     Route::get('events', [EventController::class, 'index']);
@@ -129,3 +129,5 @@ Route::group(['middleware' => 'auth:api'], function(){
     // DELETE api/event/:event
     Route::delete('event/{event}', [EventController::class, 'destroy']);
 });
+
+Route::get('import', [\App\Http\Controllers\ImportController::class, 'import']);

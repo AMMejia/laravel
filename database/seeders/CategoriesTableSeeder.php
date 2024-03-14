@@ -85,7 +85,7 @@ class CategoriesTableSeeder extends Seeder
         Category::create([
             'name' => 'COMODAS',
         ]);
-        
+
         Category::create([
             'name' => 'ARO VERDE',
         ]);
@@ -187,9 +187,6 @@ class CategoriesTableSeeder extends Seeder
         ]);
         Category::create([
             'name' => 'COJINES GLOW',
-        ]);
-        Category::create([
-            'name' => 'COJINES TEMATICOS',
         ]);
         Category::create([
             'name' => 'CAMINOS',

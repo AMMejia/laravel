@@ -16,10 +16,10 @@ class ProductsTableSeeder extends Seeder
         $category = \App\Models\Category::findOrFail(1);
         $product = new \App\Models\Product;
         $product->name = 'Mesas Dublin blancas';
-        $product->cost = 577.78;
-        $product->unit = 'pza';
         $product->measurement = '2.40m x 1.00m x .72cm';
         $product->existences = 10;
+        $product->unit = 'pza';
+        $product->cost = 577.78;
         $product->category()->associate($category);
         $product->save();
     }
